@@ -1,0 +1,15 @@
+{
+  "name": "zipcture",
+  "version": "1.0.0",
+  "description": "Zipcture is an image compression front-side library that reduces images sizes using webAssembly through various codecs.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ryltar",
+  "license": "ISC"
+}
