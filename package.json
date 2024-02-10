@@ -1,15 +1,30 @@
 {
-  "name": "zipcture",
+  "name": "zipicture",
   "version": "1.0.0",
   "description": "Zipcture is an image compression front-side library that reduces images sizes using webAssembly through various codecs.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "commonjs",
   "files": [
     "/dist"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run clean && tsc && webpack",
+    "clean": "shx rm -rf dist lib"
   },
   "author": "ryltar",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "comlink": "^4.4.1",
+    "gulp": "^4.0.2"
+  },
+  "devDependencies": {
+    "comlink-loader": "^2.0.0",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "shx": "^0.3.4",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4",
+    "worker-loader": "^3.0.8"
+  }
 }
