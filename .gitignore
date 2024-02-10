@@ -40,7 +40,7 @@ build/Release
 
 package-lock.json
 .vscode
-lib
+lib/*
 
 # Dependency directories
 node_modules/
