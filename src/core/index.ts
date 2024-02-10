@@ -1,0 +1,2 @@
+export { Zipcture } from "./zipcture";
+
