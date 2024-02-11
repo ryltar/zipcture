@@ -6,8 +6,7 @@
   "lib": [ "es2020", "dom"],
   "moduleResolution": "Node",
   "declaration": true,
-  "declarationDir": "./dist/types",
-  "outDir": "./lib"
+  "outDir": "./dist"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "src/codecs/*"]

@@ -1,6 +1,7 @@
 import { expose } from 'comlink';
-import { resize } from '../../codecs/hqx/pkg/squooshhqx';
+
 import mozjpegEncode from '../../lib/encoders/mozJPEG/worker/mozjpegEncode';
+import resize from '../../lib/processors/resize/worker/resize';
 
 const exports = {
   mozjpegEncode(

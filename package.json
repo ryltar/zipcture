@@ -9,14 +9,13 @@
     "/dist"
   ],
   "scripts": {
-    "build": "npm run clean && tsc && webpack",
+    "build": "npm run clean && webpack",
     "clean": "shx rm -rf dist lib"
   },
   "author": "ryltar",
   "license": "ISC",
   "dependencies": {
-    "comlink": "^4.4.1",
-    "gulp": "^4.0.2"
+    "comlink": "^4.4.1"
   },
   "devDependencies": {
     "comlink-loader": "^2.0.0",
@@ -24,7 +23,6 @@
     "shx": "^0.3.4",
     "ts-loader": "^9.5.1",
     "webpack": "^5.90.1",
-    "webpack-cli": "^5.1.4",
-    "worker-loader": "^3.0.8"
+    "webpack-cli": "^5.1.4"
   }
 }

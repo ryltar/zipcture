@@ -1,7 +1,7 @@
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/index.ts'],
+  entry: {index: './src/index.ts'},
   module: {
     rules: [
       {
@@ -9,19 +9,22 @@ module.exports = {
         loader: 'ts-loader',
         exclude: /node_modules/,
         options: {
+          configFile: 'tsconfig.json',
           transpileOnly: false
         }
       },
+      {
+        test: /\.wasm$/,
+    },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.d.ts'],
   },
   devtool: 'source-map',
   output: {
-    filename: 'index.js',
+    publicPath: 'auto',
     libraryTarget: 'umd',
-    libraryExport: 'default',
   },
   plugins: [new ForkTsCheckerWebpackPlugin()]
 

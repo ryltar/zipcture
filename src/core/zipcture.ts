@@ -2,7 +2,8 @@ import { resize } from '../lib/processors/resize/core';
 import { SourceImage } from './features-core';
 import { EncoderState, encoderMap } from './features-meta';
 import { defaultProcessorState } from './features-meta/index';
-import { ImageMimeTypes, assertSignal } from './utils';
+import { assertSignal } from './utils';
+import { ImageMimeTypes } from './utils/index';
 import WorkerBridge from './worker-bridge';
 
 export class Zipcture {
@@ -20,7 +21,7 @@ export class Zipcture {
     source: SourceImage,
     width: number,
     height: number
-  ): Promise<ImageData> {
+  ): Promise<File> {
 
     const availableWorker: WorkerBridge = this.workerBridges[0];
 
@@ -37,7 +38,19 @@ export class Zipcture {
       result = await resize(source, processorState.resize, availableWorker);
     }
 
-    return result;
+    const canvas = new OffscreenCanvas(width, height);
+    const ctx = canvas.getContext('2d');
+
+    ctx.putImageData(result, 0, 0);      
+
+    const type: ImageMimeTypes = 'image/jpeg';
+
+    return new File(
+      [await canvas.convertToBlob()],
+      `compressed.jpeg`,
+      { type },
+    );
+
   }
 
   public async compressImage(
