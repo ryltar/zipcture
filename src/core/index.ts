@@ -1,2 +1,2 @@
-export { Zipcture } from "./zipcture";
-
+export * from "./features-core";
+export { Zipicture } from "./zipicture";

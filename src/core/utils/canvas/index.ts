@@ -1,10 +1,20 @@
+import { ImageMimeTypes } from "..";
+
 /** Replace the contents of a canvas with the given data */
 export function drawDataToCanvas(canvas: OffscreenCanvas, data: ImageData) {
     const ctx = canvas.getContext('2d');
     if (!ctx) throw Error('Canvas not initialized');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.putImageData(data, 0, 0);
-  }
+}
+
+/** Replace the contents of a canvas with the given data */
+export async function convertImageDataToBlob(data: ImageData, width: number, height: number, type: ImageMimeTypes): Promise<Blob> {
+  const canvas = new OffscreenCanvas(width, height);
+  const ctx = canvas.getContext('2d');
+  ctx.putImageData(data, 0, 0);      
+  return await canvas.convertToBlob()
+}
 
 interface DrawableToImageDataOptions {
   width?: number;

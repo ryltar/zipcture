@@ -1,12 +1,13 @@
 import { resize } from '../lib/processors/resize/core';
+import { Options } from '../lib/processors/resize/shared/meta';
 import { SourceImage } from './features-core';
 import { EncoderState, encoderMap } from './features-meta';
-import { defaultProcessorState } from './features-meta/index';
 import { assertSignal } from './utils';
+import { convertImageDataToBlob } from './utils/canvas';
 import { ImageMimeTypes } from './utils/index';
 import WorkerBridge from './worker-bridge';
 
-export class Zipcture {
+export class Zipicture {
   private workerBridges: WorkerBridge[] = [];
   private abortControllers: AbortController[] = [];
 
@@ -19,36 +20,19 @@ export class Zipcture {
 
   public async processImage(
     source: SourceImage,
-    width: number,
-    height: number
+    options: Options
   ): Promise<File> {
 
     const availableWorker: WorkerBridge = this.workerBridges[0];
 
     assertSignal(availableWorker.abortController.signal);
-
-    let result = source.preprocessed;
-
-    const processorState = defaultProcessorState;
-
-    processorState.resize.height = height;
-    processorState.resize.width = width;
     
-    if (processorState.resize.enabled) {
-      result = await resize(source, processorState.resize, availableWorker);
-    }
-
-    const canvas = new OffscreenCanvas(width, height);
-    const ctx = canvas.getContext('2d');
-
-    ctx.putImageData(result, 0, 0);      
-
-    const type: ImageMimeTypes = 'image/jpeg';
+    let result = await resize(source, options, availableWorker);
 
     return new File(
-      [await canvas.convertToBlob()],
-      `compressed.jpeg`,
-      { type },
+      [await convertImageDataToBlob(result, options.width, options.height, options.type)],
+      `compressed.${options.type.substring(options.type.indexOf('/') + 1)}`,
+      { type: options.type },
     );
 
   }

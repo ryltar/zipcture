@@ -1,3 +1,5 @@
+import { ImageMimeTypes } from "../../../../core/utils";
+
 type BrowserResizeMethods =
   | 'browser-pixelated'
   | 'browser-low'
@@ -11,6 +13,16 @@ type WorkerResizeMethods =
   | 'lanczos3'
   | 'hqx';
 
+type VectorResizeMethods = 
+  | 'vector';
+
+export const browserResizeMethods: BrowserResizeMethods[] = [
+  'browser-pixelated',
+  'browser-low',
+  'browser-medium',
+  'browser-high'
+]
+
 export const workerResizeMethods: WorkerResizeMethods[] = [
   'triangle',
   'catrom',
@@ -18,6 +30,10 @@ export const workerResizeMethods: WorkerResizeMethods[] = [
   'lanczos3',
   'hqx',
 ];
+
+export const VectorResizeMethods: VectorResizeMethods[] = [
+  'vector'
+]
 
 export type Options =
   | BrowserResizeOptions
@@ -28,6 +44,7 @@ export interface ResizeOptionsCommon {
   width: number;
   height: number;
   fitMethod: 'stretch' | 'contain';
+  type: ImageMimeTypes;
 }
 
 export interface BrowserResizeOptions extends ResizeOptionsCommon {
@@ -41,7 +58,7 @@ export interface WorkerResizeOptions extends ResizeOptionsCommon {
 }
 
 export interface VectorResizeOptions extends ResizeOptionsCommon {
-  method: 'vector';
+  method: VectorResizeMethods;
 }
 
 export const defaultOptions: Options = {

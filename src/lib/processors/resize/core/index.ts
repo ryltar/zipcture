@@ -71,13 +71,13 @@ export async function resize(
   workerBridge: WorkerBridge,
 ) {
   if (options.method === 'vector') {
-    if (!source.vectorImage) throw Error('No vector image available');
-    return vectorResize(source.vectorImage, options);
+    if (!source.htmlImageElement) throw Error('No vector image available');
+    return vectorResize(source.htmlImageElement, options);
   }
   if (isWorkerOptions(options)) {
-    return workerBridge.resize(source.preprocessed, options);
+    return workerBridge.resize(source.imageData, options);
   }
-  return browserResize(source.preprocessed, options);
+  return browserResize(source.imageData, options);
 }
 
 

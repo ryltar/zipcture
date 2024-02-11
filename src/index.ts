@@ -1,3 +1,3 @@
 export * from './core/features-core';
-export * from './core/zipcture';
+export * from './core/zipicture';
 

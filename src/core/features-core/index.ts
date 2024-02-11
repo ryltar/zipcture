@@ -1,6 +1,8 @@
+export * from './../../lib/processors/resize/shared/meta';
+
 export interface SourceImage {
-    file: File;
-    decoded: ImageData;
-    preprocessed: ImageData;
-    vectorImage?: HTMLImageElement;
+    imageData?: ImageData;
+    htmlImageElement?: HTMLImageElement;
 }
+
+
