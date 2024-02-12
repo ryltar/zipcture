@@ -8,7 +8,8 @@ export { EncodeOptions, MozJpegColorSpace };
 export const label = 'MozJPEG';
 export const mimeType = 'image/jpeg';
 export const extension = 'jpg';
-export const defaultOptions: EncodeOptions = {
+
+export const defaultEncoderOptions: EncodeOptions = {
   quality: 75,
   baseline: false,
   arithmetic: false,

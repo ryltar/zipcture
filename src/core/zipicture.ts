@@ -1,7 +1,6 @@
 import { resize } from '../lib/processors/resize/core';
 import { Options } from '../lib/processors/resize/shared/meta';
-import { SourceImage } from './features-core';
-import { EncoderState, encoderMap } from './features-meta';
+import { EncoderState, SourceImage, defaultEncoderState, defaultProcessorState, encoderMap } from './features-meta';
 import { assertSignal } from './utils';
 import { convertImageDataToBlob } from './utils/canvas';
 import { ImageMimeTypes } from './utils/index';
@@ -20,7 +19,7 @@ export class Zipicture {
 
   public async processImage(
     source: SourceImage,
-    options: Options
+    options: Options = defaultProcessorState
   ): Promise<File> {
 
     const availableWorker: WorkerBridge = this.workerBridges[0];
@@ -39,26 +38,19 @@ export class Zipicture {
 
   public async compressImage(
     image: ImageData,
-    quality: number,
+    options: EncoderState = defaultEncoderState,
   ): Promise<File> {
-
-    const encoderState: EncoderState = {
-      type: 'mozJPEG',
-      options: encoderMap.mozJPEG.meta.defaultOptions,
-    }
-
-    encoderState.options.quality = quality;
 
     const availableWorker: WorkerBridge = this.workerBridges[1];
 
     assertSignal(availableWorker.abortController.signal);
 
-    const encoder = encoderMap[encoderState.type];
+    const encoder = encoderMap[options.type];
 
     const compressedData = await encoder.encode(
       availableWorker,
       image,
-      encoderState.options
+      options.options
     );
   
     // This type ensures the image mimetype is consistent with our mimetype sniffer

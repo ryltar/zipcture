@@ -1,2 +1,3 @@
-export * from "./features-core";
+export * from "./features-meta";
 export { Zipicture } from "./zipicture";
+

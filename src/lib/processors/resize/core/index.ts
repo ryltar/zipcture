@@ -1,5 +1,4 @@
-
-import { SourceImage } from '../../../../core/features-core';
+import { SourceImage } from '../../../../core/features-meta';
 import { BuiltinResizeMethod, builtinResize, drawableToImageData } from '../../../../core/utils/canvas';
 import WorkerBridge from '../../../../core/worker-bridge';
 import {

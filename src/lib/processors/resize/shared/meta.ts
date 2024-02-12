@@ -61,7 +61,7 @@ export interface VectorResizeOptions extends ResizeOptionsCommon {
   method: VectorResizeMethods;
 }
 
-export const defaultOptions: Options = {
+export const defaultProcessOptions: Options = {
   // Width and height will always default to the image size.
   // This is set elsewhere.
   width: 1,
