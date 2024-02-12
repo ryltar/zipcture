@@ -66,6 +66,7 @@ export const defaultOptions: Options = {
   // This is set elsewhere.
   width: 1,
   height: 1,
+  type: 'image/jpeg',
   // This will be set to 'vector' if the input is SVG.
   method: 'lanczos3',
   fitMethod: 'stretch',
